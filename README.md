@@ -26,3 +26,12 @@ This command will execute the program with the default configuration. To use oth
 ```
 docker run --rm sensor-platform wsl
 ```
+
+## Theory
+This sensor simulation involves a Direct Irradiance (DNI) sensor. To give somewhat "accurate" readings, the following equation has been used to correlate time of day to a typical DNI reading.
+
+This trajectory in theory follows a sinusoidal curve where maximum irradiance occurs in the middle of the day
+
+$$
+DNI(t) = DNI_{max} \times (\pi \times{t - t_{sunriseTime} \over t_{sunsetTime} - t_{sunriseTime}})
+$$
