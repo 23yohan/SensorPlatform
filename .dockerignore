@@ -1,5 +1,8 @@
+# python based
 __pycache__/
 interfaces/__pycache__/
+logs/
+
+# Git
 .git/
 .gitignore
-
