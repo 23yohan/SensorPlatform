@@ -2,7 +2,7 @@ import yaml
 
 class Configuration():
     
-    def __init__(self, configPath):
+    def __init__(self, configPath: str ):
         self.configPath = configPath
         self.config = self.import_config()
 
