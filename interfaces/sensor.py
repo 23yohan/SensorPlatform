@@ -89,7 +89,7 @@ class DniSensor():
         '''
         return self._sensorActive
     
-    def stop_sensor(self):
+    def stop_sensor(self) -> bool:
         '''
         @Brief: Function stops the thread
         @Param: self - Instance of the class
@@ -103,16 +103,17 @@ class DniSensor():
         finally:
             return True if not self._sensorActive else False
 
-    def retrieve_values(self):
+    def retrieve_values(self) -> float:
         '''
         @Brief: Function retrieves the latest value of the queue
         @Param: self - Instance of the class 
+        @Return: value from the queue, -1.0 if cannot retrieve
         '''
         try:
             return self.dataQueue.get()
         except Exception as e:
             print(f"Error retreving value off queue {e}")
-            return -1
+            return -1.0
 
     
 if __name__ == "__main__":
