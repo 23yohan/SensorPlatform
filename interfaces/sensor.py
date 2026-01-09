@@ -7,9 +7,11 @@ from time import sleep
 from threading import Lock
 from queue import Queue
 
+from logger import Logger
+
 
 class DniSensor():
-    def __init__(self, config) -> None:
+    def __init__(self, config: dict, log=None) -> None:
         self.config = config
         self.sensorConf = self.config["dniSensor"]
         self.minLim = self.sensorConf["minimumLimit"]
@@ -24,8 +26,14 @@ class DniSensor():
         # Define threading parameters
         self._sensorThread = threading.Thread(target=self.sensor_thread)
         self._sensorActive = False
-        self.lock = Lock()
         self.dataQueue = Queue()
+
+        #Define logger
+        if log == None:
+            loggerObj = Logger(config, "Sensor")
+            self.log = loggerObj.get_logger()
+        else:
+            self.log = log
     
     def to_seconds(self, t: dt) -> int:
         '''
@@ -99,7 +107,7 @@ class DniSensor():
             self._sensorActive = False
             self._sensorThread.join()
         except Exception as e:
-            print(f"Unable to stop sensor {e}")
+            self.log.error(f"Unable to stop sensor {e}")
         finally:
             return True if not self._sensorActive else False
 
@@ -112,7 +120,7 @@ class DniSensor():
         try:
             return self.dataQueue.get()
         except Exception as e:
-            print(f"Error retreving value off queue {e}")
+            self.log.error(f"Error retreving value off queue {e}")
             return -1.0
 
     
