@@ -1,4 +1,5 @@
 __pycache__/
 interfaces/__pycache__/
-logs
+logs/
 venv/
+config/mosquitto/log
