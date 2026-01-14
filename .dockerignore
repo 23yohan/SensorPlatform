@@ -4,7 +4,7 @@ interfaces/__pycache__/
 logs/
 venv/
 config/mosquitto/log/
-
+config/db/data
 # Git
 .git/
 .gitignore
