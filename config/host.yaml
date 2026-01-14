@@ -1,0 +1,24 @@
+platform:
+  os: macOS
+  type: host
+mqtt:
+  dns: localhost
+  port: 1883
+  timeout: 60
+dniSensor:
+  sunrise: 5 # in 24 hour time
+  sunset: 18 # in 24 hour time
+  minimumLimit: 0
+  maximumLimit: 1100
+  limitStep: 0.1
+  stdDev: 10
+logging:
+  loggingPath: "/Users/matthew/dev/SensorPlatform/logs/"
+  loggingInterval: 5
+  level: info
+db:
+  host: localhost
+  port: 5432
+  username: myk_46
+  password: myk_psdb
+  dbName: sensor_platform
