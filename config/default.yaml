@@ -1,10 +1,10 @@
 platform:
   os: macOS
+  type: container
 mqtt:
-  username: matthew
-  password: 1234
-  port: 8883
-  defaultValues: [1,2,3,4]
+  dns: mqtt
+  port: 1883
+  timeout: 5
 dniSensor:
   sunrise: 5 # in 24 hour time
   sunset: 18 # in 24 hour time
@@ -15,3 +15,10 @@ dniSensor:
 logging:
   loggingPath: "/Users/matthew/dev/SensorPlatform/logs/"
   loggingInterval: 5
+  level: info
+db:
+  host: db
+  port: 5432
+  username: myk_46
+  password: myk_psdb
+  dbName: sensor_platform
