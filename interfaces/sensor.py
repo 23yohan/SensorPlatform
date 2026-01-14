@@ -7,11 +7,9 @@ from time import sleep
 from threading import Lock
 from queue import Queue
 
-from logger import Logger
-
 
 class DniSensor():
-    def __init__(self, config: dict, log=None) -> None:
+    def __init__(self, config: dict, log) -> None:
         self.config = config
         self.sensorConf = self.config["dniSensor"]
         self.minLim = self.sensorConf["minimumLimit"]
@@ -29,11 +27,7 @@ class DniSensor():
         self.dataQueue = Queue()
 
         #Define logger
-        if log == None:
-            loggerObj = Logger(config, "Sensor")
-            self.log = loggerObj.get_logger()
-        else:
-            self.log = log
+        self.log = log
     
     def to_seconds(self, t: dt) -> int:
         '''
@@ -126,10 +120,16 @@ class DniSensor():
     
 if __name__ == "__main__":
     from configuration import Configuration
+    from logger import Logger
+
     
-    confObj = Configuration("/Users/matthew/dev/SensorPlatform/config/default.yaml")
+    confObj = Configuration("/Users/matthew/dev/SensorPlatform/config/host.yaml")
     config = confObj.get_config()
-    dniSim = DniSensor(config)
+
+    loggerObj = Logger(config, "Sensor")
+    log = loggerObj.get_logger()
+
+    dniSim = DniSensor(config, log)
     dniSim.dni_simulator()
 
     i = 0
